@@ -10,6 +10,7 @@ class MainView extends StatelessWidget {
     return const Scaffold(
       body: SafeArea(
           child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: SideMenu(),
