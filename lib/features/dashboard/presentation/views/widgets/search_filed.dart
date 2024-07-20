@@ -19,16 +19,24 @@ class SearchField extends StatelessWidget {
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
         suffixIcon: InkWell(
           onTap: () {},
           child: Container(
-            padding: const EdgeInsets.all(defaultPadding * 0.75),
-            margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            padding: const EdgeInsets.all(
+              defaultPadding * 0.75,
+            ),
+            margin: const EdgeInsets.symmetric(
+              horizontal: defaultPadding / 2,
+            ),
             decoration: const BoxDecoration(
               color: primaryColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
             child: SvgPicture.asset("assets/icons/Search.svg"),
           ),
