@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_admin_panel/core/utils/routers/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      
+      routerConfig: router,
     );
   }
 }
