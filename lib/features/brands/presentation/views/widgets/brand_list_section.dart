@@ -1,41 +1,37 @@
+import 'package:ecommerce_app_admin_panel/core/utils/constants/color_list.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/functions/show_brrand_form.dart';
 import 'package:flutter/material.dart';
 
-class ProductListSection extends StatelessWidget {
-  const ProductListSection({super.key});
+class BrandListSection extends StatelessWidget {
+  const BrandListSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: secondaryColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [
           Text(
-            "All Products",
+            "All Brands",
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
             width: double.infinity,
             child: DataTable(
-              columnSpacing: defaultPadding,
               columns: const [
                 DataColumn(
-                  label: Text("Product Name"),
-                ),
-                DataColumn(
-                  label: Text("Category"),
+                  label: Text("Brands Name"),
                 ),
                 DataColumn(
                   label: Text("Sub Category"),
                 ),
                 DataColumn(
-                  label: Text("Price"),
+                  label: Text("Added Date"),
                 ),
                 DataColumn(
                   label: Text("Edit"),
@@ -45,12 +41,13 @@ class ProductListSection extends StatelessWidget {
                 ),
               ],
               rows: List.generate(
-                15,
-                (index) => productDataRow(
-                  edit: () {
-                    //showAddProductForm(context, dataProvider.products[index]);
-                  },
+                10,
+                (index) => brandDataRow(
+                  index + 1,
                   delete: () {},
+                  edit: () {
+                    showBrandForm(context);
+                  },
                 ),
               ),
             ),
@@ -61,48 +58,44 @@ class ProductListSection extends StatelessWidget {
   }
 }
 
-DataRow productDataRow({Function? edit, Function? delete}) {
+DataRow brandDataRow(int index, {Function? edit, Function? delete}) {
   return DataRow(
     cells: [
       DataCell(
         Row(
           children: [
-            Image.asset(
-              'assets/images/image18.png',
-              height: 30,
-              width: 30,
-              errorBuilder: (BuildContext context, Object exception,
-                  StackTrace? stackTrace) {
-                return const Icon(Icons.error);
-              },
+            Container(
+              height: 24,
+              width: 24,
+              decoration: BoxDecoration(
+                color: colors[index % colors.length],
+                shape: BoxShape.circle,
+              ),
+              child: Text(index.toString(), textAlign: TextAlign.center),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text('Product name'),
+              child: Text('Band Name'),
             ),
           ],
         ),
       ),
       const DataCell(
-        Text('name'),
-      ),
-      const DataCell(
-        Text('SubCategory'),
-      ),
-      const DataCell(
-        Text('price'),
+        Text('Mobile'),
       ),
       DataCell(
-        IconButton(
+        Text(
+          DateTime.now().toString(),
+        ),
+      ),
+      DataCell(IconButton(
           onPressed: () {
             if (edit != null) edit();
           },
           icon: const Icon(
             Icons.edit,
             color: Colors.white,
-          ),
-        ),
-      ),
+          ))),
       DataCell(
         IconButton(
           onPressed: () {

@@ -5,9 +5,10 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
     required this.onPressed,
-    required this.title,
+    required this.title, required this.onPressedRefresh,
   });
   final VoidCallback onPressed;
+  final VoidCallback onPressedRefresh;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,11 @@ class CustomAppBar extends StatelessWidget {
           onPressed: onPressed,
           icon: const Icon(Icons.add),
           label: const Text("Add New"),
+        ),
+        const SizedBox(width: 20),
+        IconButton(
+          onPressed: onPressedRefresh,
+          icon: const Icon(Icons.refresh),
         ),
       ],
     );

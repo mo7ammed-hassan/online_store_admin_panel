@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/cancel_and_submit_bottons_form.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/custom_deop_down.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/custom_text_filed.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/multi_selected_drop_down.dart';
@@ -172,33 +173,8 @@ class ProductSubmitForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: defaultPadding),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: secondaryColor,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the popup
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                  const SizedBox(width: defaultPadding),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: primaryColor,
-                    ),
-                    onPressed: () {
-                      // Validate and save the form
-
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Submit'),
-                  ),
-                ],
+              CancleAndSubmitFormBottons(
+                onPressedSubmit: () {},
               ),
             ],
           ),
@@ -207,3 +183,4 @@ class ProductSubmitForm extends StatelessWidget {
     );
   }
 }
+

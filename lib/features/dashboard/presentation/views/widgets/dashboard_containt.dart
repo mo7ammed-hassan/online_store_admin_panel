@@ -14,6 +14,7 @@ class DashboardContaint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           flex: 5,
@@ -24,6 +25,7 @@ class DashboardContaint extends StatelessWidget {
                   showAddProductForm(context);
                 },
                 title: 'My Products',
+                onPressedRefresh: () {},
               ),
               const SizedBox(height: defaultPadding),
               // product summary section

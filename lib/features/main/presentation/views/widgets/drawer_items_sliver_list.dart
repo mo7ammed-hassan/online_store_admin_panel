@@ -11,6 +11,7 @@ class DraweritemsSliverList extends StatefulWidget {
 
 class _DraweritemsSliverListState extends State<DraweritemsSliverList> {
   int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
@@ -18,11 +19,11 @@ class _DraweritemsSliverListState extends State<DraweritemsSliverList> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
+            
             if (activeIndex != index) {
               setState(() {
                 activeIndex = index;
               });
-              //print(activeIndex);
             }
           },
           child: DrawerItem(

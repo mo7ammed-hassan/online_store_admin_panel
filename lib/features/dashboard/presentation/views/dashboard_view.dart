@@ -1,6 +1,6 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/dashboard_containt.dart';
-import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/dashboard_header.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/main_view_header.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,16 +9,19 @@ class Dashboardview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: SingleChildScrollView(
         primary: false,
-        padding: EdgeInsets.all(defaultPadding),
+        padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
             // Dashboard header
-            DashboardHeader(),
-            SizedBox(height: defaultPadding),
-            DashboardContaint(),
+            MainViewsHeader(
+              title: "Dashboard",
+              onChange: (vlaue) {},
+            ),
+            const SizedBox(height: defaultPadding),
+            const DashboardContaint(),
           ],
         ),
       ),
