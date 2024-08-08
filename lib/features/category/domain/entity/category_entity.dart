@@ -14,7 +14,7 @@ class CategoryEntity {
   // factory constructor
   factory CategoryEntity.fromJson(data) {
     return CategoryEntity(
-      id: data['id'],
+      id: data['_id'],
       categoryName: data['name'],
       categoryImage: data['image'],
       createdAt: data['createdAt'],

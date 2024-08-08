@@ -15,9 +15,8 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CategoryCubit(
-        getIt.get<CategoryUseCaseImp>(),
-      ),
+      create: (context) =>
+          CategoryCubit(getIt.get<CategoryUseCaseImp>())..getAllCategories(),
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(defaultPadding),
@@ -36,7 +35,20 @@ class CategoryView extends StatelessWidget {
                 onPressedRefresh: () {},
               ),
               const SizedBox(height: 20),
-              const CategoryListSection(),
+              BlocBuilder<CategoryCubit, CategoryState>(
+                builder: (context, state) {
+                  if (state is CategoryLoading) {
+                    return const CircularProgressIndicator();
+                  } else if (state is GetAllCategoriesSuccess) {
+                    return CategoryListSection(categories: state.categories);
+                  } else if (state is GetAllCategoriesFailure) {
+                    print('Error: ${state.message}');
+                    return Text('Error: ${state.message}');
+                  } else {
+                    return const Text('Unexpected state');
+                  }
+                },
+              ),
             ],
           ),
         ),

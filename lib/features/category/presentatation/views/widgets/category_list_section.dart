@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
+import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListSection extends StatelessWidget {
-  const CategoryListSection({super.key});
-
+  const CategoryListSection({super.key, required this.categories});
+  final List<CategoryEntity> categories;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,8 +41,9 @@ class CategoryListSection extends StatelessWidget {
                 ),
               ],
               rows: List.generate(
-                4,
+                categories.length,
                 (index) => categoryDataRow(
+                  category: categories[index],
                   delete: () {},
                   edit: () {
                     showAddCategoryForm(context);
@@ -55,47 +58,52 @@ class CategoryListSection extends StatelessWidget {
   }
 }
 
-DataRow categoryDataRow({Function? edit, Function? delete}) {
-  return DataRow(cells: [
-    DataCell(
-      Row(
-        children: [
-          Image.asset(
-            'assets/category/electronics.png',
-            height: 30,
-            width: 30,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: Text('Electronics'),
-          ),
-        ],
-      ),
-    ),
-    DataCell(
-      Text(DateTime.now().toString()),
-    ),
-    DataCell(
-      IconButton(
-        onPressed: () {
-          if (edit != null) edit();
-        },
-        icon: const Icon(
-          Icons.edit,
-          color: Colors.white,
+DataRow categoryDataRow(
+    {required CategoryEntity category, Function? edit, Function? delete}) {
+  return DataRow(
+    cells: [
+      DataCell(
+        Row(
+          children: [
+            CachedNetworkImage(
+              imageUrl: category.categoryImage,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              height: 30,
+              width: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Text(category.categoryName),
+            ),
+          ],
         ),
       ),
-    ),
-    DataCell(
-      IconButton(
-        onPressed: () {
-          if (delete != null) delete();
-        },
-        icon: const Icon(
-          Icons.delete,
-          color: Colors.red,
+      DataCell(
+        Text(category.createdAt),
+      ),
+      DataCell(
+        IconButton(
+          onPressed: () {
+            if (edit != null) edit();
+          },
+          icon: const Icon(
+            Icons.edit,
+            color: Colors.white,
+          ),
         ),
       ),
-    ),
-  ]);
+      DataCell(
+        IconButton(
+          onPressed: () {
+            if (delete != null) delete();
+          },
+          icon: const Icon(
+            Icons.delete,
+            color: Colors.red,
+          ),
+        ),
+      ),
+    ],
+  );
 }
