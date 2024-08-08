@@ -1,14 +1,18 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/helper/simple_bloc_observer.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/routers/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(
-    const MyApp(),
+    const OnlineStore(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class OnlineStore extends StatelessWidget {
+  const OnlineStore({super.key});
 
   @override
   Widget build(BuildContext context) {

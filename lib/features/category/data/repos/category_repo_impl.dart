@@ -5,10 +5,10 @@ import 'package:ecommerce_app_admin_panel/features/category/data/data_sources/ca
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/repos/category_repo.dart';
 
-class CategoryRepoImp extends CategoryRepo {
+class CategoryRepoImpl extends CategoryRepo {
   final CategoryRemoteDataSourceImpl _source;
 
-  CategoryRepoImp(this._source);
+  CategoryRepoImpl(this._source);
 
   @override
   Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
