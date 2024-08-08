@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/services/api_services.dart';
@@ -11,6 +10,9 @@ import 'package:ecommerce_app_admin_panel/features/category/presentatation/manag
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/views/widgets/category_list_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.instance;
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -18,8 +20,15 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CategoryCubit(CategoryUseCaseImp(
-          CategoryRepoImpl(CategoryRemoteDataSourceImpl(ApiService(Dio()))))),
+      create: (context) => CategoryCubit(
+        CategoryUseCaseImp(
+          CategoryRepoImpl(
+            CategoryRemoteDataSourceImpl(
+              getIt.get<ApiService>(),
+            ),
+          ),
+        ),
+      ),
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(defaultPadding),
