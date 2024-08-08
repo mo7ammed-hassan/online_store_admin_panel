@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/functions/format_date.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
+import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryListSection extends StatelessWidget {
   const CategoryListSection({super.key, required this.categories});
@@ -44,7 +47,10 @@ class CategoryListSection extends StatelessWidget {
                 categories.length,
                 (index) => categoryDataRow(
                   category: categories[index],
-                  delete: () {},
+                  delete: () {
+                    BlocProvider.of<CategoryCubit>(context)
+                        .deleteCategory(categoryId: categories[index].id);
+                  },
                   edit: () {
                     showAddCategoryForm(context);
                   },
@@ -69,6 +75,7 @@ DataRow categoryDataRow(
               imageUrl: category.categoryImage,
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
+              fit: BoxFit.cover,
               height: 30,
               width: 30,
             ),
@@ -80,7 +87,9 @@ DataRow categoryDataRow(
         ),
       ),
       DataCell(
-        Text(category.createdAt),
+        Text(
+          formatDate(category.createdAt),
+        ),
       ),
       DataCell(
         IconButton(

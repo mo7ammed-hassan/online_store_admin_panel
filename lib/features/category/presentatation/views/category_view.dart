@@ -1,6 +1,7 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/setup_services_locator.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/helper/snak_bar_helper.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/main_view_header.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/use_cases/category_use_case.dart';
@@ -35,15 +36,24 @@ class CategoryView extends StatelessWidget {
                 onPressedRefresh: () {},
               ),
               const SizedBox(height: 20),
-              BlocBuilder<CategoryCubit, CategoryState>(
+              BlocConsumer<CategoryCubit, CategoryState>(
+                listener: (context, state) {
+                  if (state is DeleteCategorySuccess) {
+                    showTopSnackBar(context, 'Delete Category Success');
+                  }
+                  if (state is UpdateCategorySuccess) {
+                    showTopSnackBar(context, 'Update Category Success');
+                  }
+                },
                 builder: (context, state) {
                   if (state is CategoryLoading) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   } else if (state is GetAllCategoriesSuccess) {
                     return CategoryListSection(categories: state.categories);
                   } else if (state is GetAllCategoriesFailure) {
-                    print('Error: ${state.message}');
-                    return Text('Error: ${state.message}');
+                    return Text(
+                      'Error: ${state.message}',
+                    ); //  i should replace it to display data
                   } else {
                     return const Text('Unexpected state');
                   }
