@@ -9,7 +9,6 @@ import 'package:ecommerce_app_admin_panel/features/category/presentatation/views
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
 
