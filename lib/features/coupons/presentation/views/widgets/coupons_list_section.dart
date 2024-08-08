@@ -2,15 +2,14 @@ import 'package:ecommerce_app_admin_panel/core/utils/constants/color_list.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 
 
 
 class CouponListSection extends StatelessWidget {
   const CouponListSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

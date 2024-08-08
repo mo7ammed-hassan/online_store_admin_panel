@@ -1,7 +1,7 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/main_view_header.dart';
 import 'package:ecommerce_app_admin_panel/features/orders/presentation/views/widgets/order_list_section.dart';
-import 'package:ecommerce_app_admin_panel/features/orders/presentation/views/widgets/order_view_appBar.dart';
+import 'package:ecommerce_app_admin_panel/features/orders/presentation/views/widgets/order_view_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class OrderView extends StatelessWidget {

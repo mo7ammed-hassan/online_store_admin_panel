@@ -9,7 +9,3 @@ final router = GoRouter(
     ),
   ],
 );
-
-
-// local data "setstate "
-// data in many widget >> state mangement "Global data"

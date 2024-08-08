@@ -25,7 +25,7 @@ class BrandsView extends StatelessWidget {
             //...your main content goes here...
             const SizedBox(height: 20),
             // prand sections
-           const BrandListSection(),
+            const BrandListSection(),
           ],
         ),
       ),
