@@ -37,14 +37,14 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   Future<void> updateCategory({
     required String categoryId,
-    required CategoryEntity category,
+    required Map<String, dynamic> data,
   }) async {
     emit(UpdateCategoryLoading());
 
     final Either<Failure, void> updateResult =
         await _categoryUse.callUpdateCategory(
       categoryId: categoryId,
-      category: category,
+      category: data,
     );
 
     updateResult.fold(

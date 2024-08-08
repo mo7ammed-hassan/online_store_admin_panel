@@ -12,7 +12,7 @@ abstract class CategoryRemoteDataSource {
   // updateCategories
   Future<void> updateCategories({
     required String categoryId,
-    required CategoryEntity category,
+    required Map<String, dynamic> category,
   });
   // addCategories
   Future<void> addCategories({required CategoryEntity category});
@@ -46,11 +46,12 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
 
   @override
   Future<void> updateCategories(
-      {required String categoryId, required CategoryEntity category}) async {
+      {required String categoryId,
+      required Map<String, dynamic> category}) async {
     await _service.updateItem(
       endPoint: 'categories',
       itemId: categoryId,
-      itemData: category.toJson(),
+      itemData: category,
     );
   }
 

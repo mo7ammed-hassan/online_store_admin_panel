@@ -11,8 +11,10 @@ abstract class CategoryRepo {
   // delete one or more categories
   Future<Either<Failure, void>> deleteCategories({required String categoryId});
   // update one or more categories
-  Future<Either<Failure, void>> updateCategories(
-      {required String categoryId, required CategoryEntity category});
+  Future<Either<Failure, void>> updateCategories({
+    required String categoryId,
+    required Map<String, dynamic> category,
+  });
   // add one or more categories
   Future<Either<Failure, void>> addCategories(
       {required CategoryEntity category});

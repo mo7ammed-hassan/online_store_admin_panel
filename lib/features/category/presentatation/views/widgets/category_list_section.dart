@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/format_date.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/services/helper/to_json_category.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,13 @@ class CategoryListSection extends StatelessWidget {
                         .deleteCategory(categoryId: categories[index].id);
                   },
                   edit: () {
+                    BlocProvider.of<CategoryCubit>(context).updateCategory(
+                      categoryId: categories[index].id,
+                      data: toJsonCategory(
+                        name: 'Updated name',
+                        image: categories[index].categoryImage,
+                      ),
+                    );
                     showAddCategoryForm(context);
                   },
                 ),

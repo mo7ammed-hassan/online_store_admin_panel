@@ -67,7 +67,8 @@ class CategoryRepoImpl extends CategoryRepo {
 
   @override
   Future<Either<Failure, void>> updateCategories(
-      {required String categoryId, required CategoryEntity category}) async {
+      {required String categoryId,
+      required Map<String, dynamic> category}) async {
     try {
       return right(
         await _source.updateCategories(

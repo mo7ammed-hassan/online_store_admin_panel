@@ -16,7 +16,7 @@ abstract class CategoryUseCase {
       {required String categoryId});
   // update the category
   Future<Either<Failure, void>> callUpdateCategory(
-      {required String categoryId, required CategoryEntity category});
+      {required String categoryId, required Map<String, dynamic> category});
   // add the category
   Future<Either<Failure, void>> callAddCategory(
       {required CategoryEntity category});
@@ -29,8 +29,9 @@ class CategoryUseCaseImp extends CategoryUseCase {
     this.categoryRepo,
   );
   @override
-  Future<Either<Failure, void>> callDeleteCategory({required String categoryId}) async {
-   return await categoryRepo.deleteCategories(categoryId: categoryId);
+  Future<Either<Failure, void>> callDeleteCategory(
+      {required String categoryId}) async {
+    return await categoryRepo.deleteCategories(categoryId: categoryId);
   }
 
   @override
@@ -39,15 +40,20 @@ class CategoryUseCaseImp extends CategoryUseCase {
   }
 
   @override
-  Future<Either<Failure, void>> callUpdateCategory(
-      {required String categoryId, required CategoryEntity category}) async {
-  return  await categoryRepo.updateCategories(
-        categoryId: categoryId, category: category);
+  Future<Either<Failure, void>> callUpdateCategory({
+    required String categoryId,
+    required Map<String, dynamic> category,
+  }) async {
+    return await categoryRepo.updateCategories(
+      categoryId: categoryId,
+      category: category,
+    );
   }
 
   @override
-  Future<Either<Failure, void>> callAddCategory({required CategoryEntity category}) async {
-   return await categoryRepo.addCategories(category: category);
+  Future<Either<Failure, void>> callAddCategory(
+      {required CategoryEntity category}) async {
+    return await categoryRepo.addCategories(category: category);
   }
 
   @override
