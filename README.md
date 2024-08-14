@@ -1,4 +1,4 @@
-# ecommerce_app_admin_panel
+# online_store_admin_panel
 
 A new Flutter project.
 
