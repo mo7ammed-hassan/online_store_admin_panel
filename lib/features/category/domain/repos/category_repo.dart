@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
@@ -11,13 +13,12 @@ abstract class CategoryRepo {
   // delete one or more categories
   Future<Either<Failure, void>> deleteCategories({required String categoryId});
   // update one or more categories
-  Future<Either<Failure, void>> updateCategories({
+  Future<Either<Failure, CategoryEntity>> updateCategories({
     required String categoryId,
     required Map<String, dynamic> category,
   });
   // add one or more categories
-  Future<Either<Failure, void>> addCategories(
-      {required CategoryEntity category});
+  Future<Either<Failure, CategoryEntity>> addCategories(
+      {required String name, required File? imageFile});
 }
 
-// in cubit i should call getcategories if i delete one or more categories

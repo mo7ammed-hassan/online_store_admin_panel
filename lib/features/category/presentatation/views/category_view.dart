@@ -1,12 +1,13 @@
+import 'dart:io';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
-import 'package:ecommerce_app_admin_panel/core/utils/functions/show_add_category_form.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/setup_services_locator.dart';
-import 'package:ecommerce_app_admin_panel/core/utils/helper/snak_bar_helper.dart';
-import 'package:ecommerce_app_admin_panel/core/widgets/custom_app_bar.dart';
-import 'package:ecommerce_app_admin_panel/core/widgets/main_view_header.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/functions/error_show_dialog.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/secoundry_view_header.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/view_header.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/use_cases/category_use_case.dart';
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
-import 'package:ecommerce_app_admin_panel/features/category/presentatation/views/widgets/category_list_section.dart';
+import 'package:ecommerce_app_admin_panel/features/category/presentatation/views/functions/show_add_category_alert_dialog.dart';
+import 'package:ecommerce_app_admin_panel/features/category/presentatation/views/widgets/build_category_list_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,49 +17,42 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CategoryCubit(getIt.get<CategoryUseCaseImp>())..getAllCategories(),
+      create: (context) => CategoryCubit(
+        getIt.get<CategoryUseCaseImp>(),
+      )..getAllCategories(),
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(defaultPadding),
+          primary: false,
           child: Column(
             children: [
-              MainViewsHeader(
+              ViewHeader(
                 title: 'Category',
-                onChange: (vlaue) {},
+                onChanged: (p0) {},
               ),
-              const SizedBox(height: defaultPadding),
-              CustomAppBar(
-                onPressed: () {
-                  showAddCategoryForm(context);
+              const SizedBox(height: defaultPadding * 1.5),
+              SecoundyViewHeader(
+                title: 'My Categories',
+                addNewOnTap: () {
+                  showAddCategoyAlertDialog(
+                    context,
+                    onSubmit: (String categoryName, File? image) async {
+                      if (image != null) {
+                        await BlocProvider.of<CategoryCubit>(context)
+                            .addCategory(name: categoryName, imageFile: image);
+                      } else {
+                        errorShowDialog(context);
+                      }
+                    },
+                  );
                 },
-                title: 'My Category',
-                onPressedRefresh: () {},
+                refreshOnTap: () async {
+                  // triger gell all categories
+                },
               ),
               const SizedBox(height: 20),
-              BlocConsumer<CategoryCubit, CategoryState>(
-                listener: (context, state) {
-                  if (state is DeleteCategorySuccess) {
-                    showTopSnackBar(context, 'Delete Category Success');
-                  }
-                  if (state is UpdateCategorySuccess) {
-                    showTopSnackBar(context, 'Update Category Success');
-                  }
-                },
-                builder: (context, state) {
-                  if (state is CategoryLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is GetAllCategoriesSuccess) {
-                    return CategoryListSection(categories: state.categories);
-                  } else if (state is GetAllCategoriesFailure) {
-                    return Text(
-                      'Error: ${state.message}',
-                    ); //  i should replace it to display data
-                  } else {
-                    return const Text('Unexpected state');
-                  }
-                },
-              ),
+              const BuildCategoryListSection(),
+              const SizedBox(height: 20),
             ],
           ),
         ),

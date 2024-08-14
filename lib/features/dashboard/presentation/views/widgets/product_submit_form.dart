@@ -1,6 +1,5 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
-import 'package:ecommerce_app_admin_panel/core/widgets/cancel_and_submit_bottons_form.dart';
-import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/custom_deop_down.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/custom_drop_down.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/custom_text_filed.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/multi_selected_drop_down.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/product_image_card.dart';
@@ -68,17 +67,11 @@ class ProductSubmitForm extends StatelessWidget {
                         }
                         return null;
                       },
-                      displayItem: (String val) {
-                        return val;
-                      },
                     ),
                   ),
                   Expanded(
                     child: CustomDropdown(
                       hintText: 'Sub category',
-                      displayItem: (val) {
-                        return val.toString();
-                      },
                       onChanged: (newValue) {
                         if (newValue != null) {}
                       },
@@ -95,9 +88,6 @@ class ProductSubmitForm extends StatelessWidget {
                     child: CustomDropdown(
                       items: const ['1', '2', '3', '4', '5'],
                       hintText: 'Select Brand',
-                      displayItem: (value) {
-                        return value.toString();
-                      },
                       onChanged: (newValue) {
                         if (newValue != null) {}
                       },
@@ -155,7 +145,6 @@ class ProductSubmitForm extends StatelessWidget {
                   Expanded(
                     child: CustomDropdown(
                       items: const ['a', 'b', 'c'],
-                      displayItem: (String? variantType) => variantType!,
                       onChanged: (newValue) {
                         if (newValue != null) {}
                       },
@@ -173,9 +162,6 @@ class ProductSubmitForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: defaultPadding),
-              CancleAndSubmitFormBottons(
-                onPressedSubmit: () {},
-              ),
             ],
           ),
         ),
@@ -183,4 +169,3 @@ class ProductSubmitForm extends StatelessWidget {
     );
   }
 }
-

@@ -27,9 +27,9 @@ class SimpleBlocObserver extends BlocObserver {
     log(transition.toString());
   }
 
-  @override
-  void onClose(BlocBase bloc) {
-    super.onClose(bloc);
-    log(bloc.toString());
-  }
+  // @override
+  // void onClose(BlocBase bloc) {
+  //   super.onClose(bloc);
+  //   log(bloc.toString());
+  // }
 }

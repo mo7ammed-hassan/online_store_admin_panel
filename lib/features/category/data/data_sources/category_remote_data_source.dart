@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/services/helper/get_category_list.dart';
 
 import 'package:ecommerce_app_admin_panel/core/utils/services/api_services.dart';
@@ -15,7 +18,7 @@ abstract class CategoryRemoteDataSource {
     required Map<String, dynamic> category,
   });
   // addCategories
-  Future<void> addCategories({required CategoryEntity category});
+  Future<void> addCategories({required String name, required File imageFile});
   // getCategoryById
   Future<CategoryEntity> getCategoryById({required String categoryId});
 }
@@ -45,19 +48,30 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   }
 
   @override
-  Future<void> updateCategories(
+  Future<CategoryEntity> updateCategories(
       {required String categoryId,
       required Map<String, dynamic> category}) async {
-    await _service.updateItem(
+    final categoryUpdated = await _service.updateItem(
       endPoint: 'categories',
       itemId: categoryId,
       itemData: category,
     );
+    return CategoryEntity.fromJson(categoryUpdated['data']);
   }
 
   @override
-  Future<void> addCategories({required CategoryEntity category}) async {
-    await _service.addItem(endPoint: 'categories', itemData: category.toJson());
+  Future<CategoryEntity> addCategories(
+      {required String name, required File imageFile}) async {
+    final categoryData = await _service.addItem(
+      endPoint: 'categories',
+      itemData: FormData.fromMap(
+        {
+          'name': name,
+          'img': await MultipartFile.fromFile(imageFile.path),
+        },
+      ),
+    );
+    return CategoryEntity.fromJson(categoryData['data']);
   }
 
   @override

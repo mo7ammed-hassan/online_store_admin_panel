@@ -4,7 +4,7 @@ abstract class CategoryState {}
 
 class CategoryInitial extends CategoryState {}
 
-class CategoryLoading extends CategoryState {}
+class GetAllCategoryLoading extends CategoryState {}
 
 class GetAllCategoriesSuccess extends CategoryState {
   final List<CategoryEntity> categories;
@@ -16,6 +16,8 @@ class GetAllCategoriesFailure extends CategoryState {
   GetAllCategoriesFailure(this.message);
 }
 
+class GetSingleCategoryLoading extends CategoryState {}
+
 class GetSingleCategorySuccess extends CategoryState {
   final CategoryEntity category;
   GetSingleCategorySuccess(this.category);
@@ -24,6 +26,18 @@ class GetSingleCategorySuccess extends CategoryState {
 class GetSingleCategoryFailure extends CategoryState {
   final String message;
   GetSingleCategoryFailure(this.message);
+}
+
+class AddCategoryLoading extends CategoryState {}
+
+class AddCategorySuccess extends CategoryState {
+  final CategoryEntity category;
+  AddCategorySuccess(this.category);
+}
+
+class AddCategoryFailure extends CategoryState {
+  final String message;
+  AddCategoryFailure(this.message);
 }
 
 class UpdateCategoryLoading extends CategoryState {}

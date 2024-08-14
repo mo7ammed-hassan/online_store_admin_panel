@@ -12,13 +12,13 @@ class CategoryEntity {
   });
 
   // factory constructor
-  factory CategoryEntity.fromJson(data) {
+  factory CategoryEntity.fromJson(Map<String, dynamic> jsonData) {
     return CategoryEntity(
-      id: data['_id'],
-      categoryName: data['name'],
-      categoryImage: data['image'],
-      createdAt: data['createdAt'],
-      updatedAt: data['updatedAt'],
+      id: jsonData['_id'],
+      categoryName: jsonData['name'],
+      categoryImage: jsonData['image'],
+      createdAt: jsonData['createdAt'],
+      updatedAt: jsonData['updatedAt'],
     );
   }
 

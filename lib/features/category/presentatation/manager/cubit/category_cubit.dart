@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
@@ -10,28 +11,44 @@ class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit(this._categoryUse) : super(CategoryInitial());
 
   final CategoryUseCaseImp _categoryUse;
+  List<CategoryEntity> categoriesList = [];
 
   Future<void> getAllCategories() async {
-    emit(CategoryLoading());
+    emit(GetAllCategoryLoading());
 
     final Either<Failure, List<CategoryEntity>> categoriesResult =
         await _categoryUse.callGetCategories();
 
     categoriesResult.fold(
       (failure) => emit(GetAllCategoriesFailure(failure.message)),
-      (categories) => emit(GetAllCategoriesSuccess(categories)),
+      (categories) {
+        categoriesList = categories;
+        emit(GetAllCategoriesSuccess(List.from(categoriesList)));
+      },
     );
   }
 
-  Future<void> getCategoryById({required String categoryId}) async {
-    emit(CategoryLoading());
+  Future<void> addCategory({
+    required String name,
+    required File imageFile,
+  }) async {
+    emit(AddCategoryLoading());
 
-    final Either<Failure, CategoryEntity> categoryResult =
-        await _categoryUse.callGetCategoryById(categoryId: categoryId);
+    final Either<Failure, CategoryEntity> addResult =
+        await _categoryUse.callAddCategory(
+      name: name,
+      imageFile: imageFile,
+    );
 
-    categoryResult.fold(
-      (failure) => emit(GetSingleCategoryFailure(failure.message)),
-      (category) => emit(GetSingleCategorySuccess(category)),
+    addResult.fold(
+      (failure) => emit(AddCategoryFailure(failure.message)),
+      (category) {
+        categoriesList.add(category);
+        print("Updated categoriesList length: ${categoriesList.length}");
+
+        emit(GetAllCategoriesSuccess(List.from(categoriesList)));
+        emit(AddCategorySuccess(category));
+      },
     );
   }
 
@@ -41,7 +58,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   }) async {
     emit(UpdateCategoryLoading());
 
-    final Either<Failure, void> updateResult =
+    final Either<Failure, CategoryEntity> updateResult =
         await _categoryUse.callUpdateCategory(
       categoryId: categoryId,
       category: data,
@@ -49,9 +66,16 @@ class CategoryCubit extends Cubit<CategoryState> {
 
     updateResult.fold(
       (failure) => emit(UpdateCategoryFailure(failure.message)),
-      (_) {
-        emit(UpdateCategorySuccess());
-        getAllCategories();
+      (updatedCategory) {
+        final index =
+            categoriesList.indexWhere((category) => category.id == categoryId);
+        if (index != -1) {
+          categoriesList[index] = updatedCategory;
+          emit(GetAllCategoriesSuccess(List.from(categoriesList)));
+          emit(UpdateCategorySuccess());
+        } else {
+          emit(UpdateCategoryFailure('Category not found in the list'));
+        }
       },
     );
   }
@@ -65,8 +89,9 @@ class CategoryCubit extends Cubit<CategoryState> {
     deleteResult.fold(
       (failure) => emit(DeleteCategoryFailure(failure.message)),
       (_) {
+        categoriesList.removeWhere((category) => category.id == categoryId);
+        emit(GetAllCategoriesSuccess(List.from(categoriesList)));
         emit(DeleteCategorySuccess());
-        getAllCategories();
       },
     );
   }

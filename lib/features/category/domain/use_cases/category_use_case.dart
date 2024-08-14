@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 
@@ -15,11 +17,11 @@ abstract class CategoryUseCase {
   Future<Either<Failure, void>> callDeleteCategory(
       {required String categoryId});
   // update the category
-  Future<Either<Failure, void>> callUpdateCategory(
+  Future<Either<Failure, CategoryEntity>> callUpdateCategory(
       {required String categoryId, required Map<String, dynamic> category});
   // add the category
-  Future<Either<Failure, void>> callAddCategory(
-      {required CategoryEntity category});
+  Future<Either<Failure, CategoryEntity>> callAddCategory(
+      {required String name, required File? imageFile});
 }
 
 // --IMPLEMENTATION--
@@ -40,7 +42,7 @@ class CategoryUseCaseImp extends CategoryUseCase {
   }
 
   @override
-  Future<Either<Failure, void>> callUpdateCategory({
+  Future<Either<Failure, CategoryEntity>> callUpdateCategory({
     required String categoryId,
     required Map<String, dynamic> category,
   }) async {
@@ -51,9 +53,9 @@ class CategoryUseCaseImp extends CategoryUseCase {
   }
 
   @override
-  Future<Either<Failure, void>> callAddCategory(
-      {required CategoryEntity category}) async {
-    return await categoryRepo.addCategories(category: category);
+  Future<Either<Failure, CategoryEntity>> callAddCategory(
+      {required String name, required File? imageFile}) async {
+    return await categoryRepo.addCategories(name: name, imageFile: imageFile);
   }
 
   @override

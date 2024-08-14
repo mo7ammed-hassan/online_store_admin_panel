@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.controller,
     required this.labelText,
-     this.maxLine,
+    this.maxLine,
     this.keyboardType,
     required this.onSave,
     this.validator,

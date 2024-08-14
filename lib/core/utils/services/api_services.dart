@@ -44,7 +44,6 @@ class ApiService {
   }) async {
     Response response =
         await dio.put('$baseUrl$endPoint/$itemId', data: itemData);
-
     return response.data;
   }
 

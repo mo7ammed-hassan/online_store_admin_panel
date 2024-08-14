@@ -35,7 +35,7 @@ class OrderDetailsView extends StatelessWidget {
           ),
           Column(
             children: List.generate(
-              orderList.length,
+              3,
               (index) {
                 return OrderInfoCard(
                   orderInfoModel: orderList[index],

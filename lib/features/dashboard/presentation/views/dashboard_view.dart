@@ -1,6 +1,6 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/widgets/view_header.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/dashboard_containt.dart';
-import 'package:ecommerce_app_admin_panel/core/widgets/main_view_header.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,9 +16,12 @@ class Dashboardview extends StatelessWidget {
         child: Column(
           children: [
             // Dashboard header
-            MainViewsHeader(
+            ViewHeader(
               title: "Dashboard",
-              onChange: (vlaue) {},
+              // search term
+              onChanged: (value) {},
+              // search button
+              onTap: () {},
             ),
             const SizedBox(height: defaultPadding),
             const DashboardContaint(),

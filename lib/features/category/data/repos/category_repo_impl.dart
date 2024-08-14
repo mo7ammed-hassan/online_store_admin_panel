@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
@@ -40,10 +42,11 @@ class CategoryRepoImpl extends CategoryRepo {
   }
 
   @override
-  Future<Either<Failure, void>> addCategories(
-      {required CategoryEntity category}) async {
+  Future<Either<Failure, CategoryEntity>> addCategories(
+      {required String name, required File? imageFile}) async {
     try {
-      return right(await _source.addCategories(category: category));
+      return right(
+          await _source.addCategories(name: name, imageFile: imageFile!));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioExeption(e));
@@ -66,7 +69,7 @@ class CategoryRepoImpl extends CategoryRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateCategories(
+  Future<Either<Failure, CategoryEntity>> updateCategories(
       {required String categoryId,
       required Map<String, dynamic> category}) async {
     try {
