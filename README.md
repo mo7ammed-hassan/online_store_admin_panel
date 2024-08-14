@@ -1,16 +1,24 @@
-# online_store_admin_panel
+# Online Store Admin Panel
 
-A new Flutter project.
+This project is an eCommerce admin panel built with Flutter. It allows administrators to manage product categories, products, and other aspects of the online store through an intuitive UI.
 
-## Getting Started
+## Table of Contents
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Running the Project](#running-the-project)
+- [API Documentation](#api-documentation)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-This project is a starting point for a Flutter application.
+## Features
+- Add, update, and delete product categories.
+- Manage products, including uploading product images.
+- Real-time updates without refreshing the entire list.
+- State management with Bloc (Cubit).
+- MVVM architecture pattern.
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
+The project follows the MVVM architecture pattern. Below is a simplified view of the project structure:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
