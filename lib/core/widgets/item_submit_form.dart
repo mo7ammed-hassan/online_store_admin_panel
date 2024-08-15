@@ -18,7 +18,7 @@ class ItemSubmitForm extends StatefulWidget {
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController itemNameController;
-  final Function(String itemName, File? image) onSubmit; // void callback
+  final Function(String itemName, File? image) onSubmit; //  callback
   final String lableText;
 
   @override

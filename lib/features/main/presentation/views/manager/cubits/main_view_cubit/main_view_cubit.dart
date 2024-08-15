@@ -3,6 +3,7 @@ import 'package:ecommerce_app_admin_panel/features/brands/presentation/views/bra
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/views/category_view.dart';
 import 'package:ecommerce_app_admin_panel/features/coupons/presentation/views/coupon_view.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:ecommerce_app_admin_panel/features/notifications/presentation/views/notification_view.dart';
 import 'package:ecommerce_app_admin_panel/features/orders/presentation/views/order_view.dart';
 import 'package:ecommerce_app_admin_panel/features/posters/presentation/views/poster_view.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/presentation/views/sub_category_view.dart';
@@ -47,8 +48,11 @@ class MainViewCubit extends Cubit<MainViewState> {
       case variantView:
         emit(const MainViewState(VariantView()));
         break;
-        case variantTypeView:
+      case variantTypeView:
         emit(const MainViewState(VariantTypeView()));
+        break;
+      case notificationView:
+        emit(const MainViewState(NotificationView()));
         break;
       default:
         emit(const MainViewState(Dashboardview()));

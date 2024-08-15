@@ -1,10 +1,10 @@
-import 'dart:io';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
-import 'package:ecommerce_app_admin_panel/features/coupons/presentation/views/functions/coupon_submit_form.dart';
+import 'package:ecommerce_app_admin_panel/features/notifications/presentation/views/widgets/notification_submit_form.dart';
 import 'package:flutter/material.dart';
 
-void showAddCouponAlertDialog(BuildContext context,
-    {required Function(String categoryName, File? image) onSubmit}) {
+void showAddNotificationAlertDialog(
+  BuildContext context,
+) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -12,13 +12,13 @@ void showAddCouponAlertDialog(BuildContext context,
         backgroundColor: secondaryColor,
         title: Center(
           child: Text(
-            'Add Coupon'.toUpperCase(),
+            'Add Notification'.toUpperCase(),
             style: const TextStyle(
               color: primaryColor,
             ),
           ),
         ),
-        content: const CouponSubmitForm(),
+        content: const NotificationSubmitForm(),
         actions: [
           TextButton(
             onPressed: () {
@@ -31,6 +31,3 @@ void showAddCouponAlertDialog(BuildContext context,
     },
   );
 }
-
-
-

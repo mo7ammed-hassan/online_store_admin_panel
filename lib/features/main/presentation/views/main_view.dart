@@ -18,7 +18,6 @@ class MainView extends StatelessWidget {
               const Expanded(
                 child: SideMenu(),
               ),
-              // to rebuild ui
               BlocBuilder<MainViewCubit, MainViewState>(
                 builder: (context, state) {
                   return Expanded(
