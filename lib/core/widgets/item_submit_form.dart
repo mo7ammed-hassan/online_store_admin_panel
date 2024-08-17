@@ -4,6 +4,7 @@ import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/snak_bar_helper.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/styles/confirm_eleveted_button_style.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/alert_dialog_content_decoration.dart';
+import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/dashboard/presentation/views/widgets/custom_text_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,11 +16,13 @@ class ItemSubmitForm extends StatefulWidget {
     required this.onSubmit,
     required this.formKey,
     required this.lableText,
+    this.category,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController itemNameController;
   final Function(String itemName, File? image) onSubmit; //  callback
   final String lableText;
+  final CategoryEntity? category;
 
   @override
   State<ItemSubmitForm> createState() => _ItemSubmitFormState();
@@ -71,9 +74,16 @@ class _ItemSubmitFormState extends State<ItemSubmitForm> {
                                 image: FileImage(selectedImage!),
                                 fit: BoxFit.contain,
                               )
-                            : null,
+                            : widget.category != null
+                                ? DecorationImage(
+                                    image:
+                                        NetworkImage(widget.category!.imageUrl),
+                                    fit: BoxFit.contain,
+                                  )
+                                : null,
                       ),
-                      child: selectedImage == null
+                      child: (selectedImage == null &&
+                              widget.category?.imageUrl == null)
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -38,15 +38,14 @@ class CategoryListSection extends StatelessWidget {
                 (index) => categoyDataRow(
                   category: categories[index],
                   editOnTap: () {
-                    showEditCategoyAlertDialog(
+                    showEditCategoryAlertDialog(
                       context,
                       category: categories[index],
                     );
                   },
                   deleteOnTap: () async {
-                    // Implement delete category logic here
-                    await BlocProvider.of<CategoryCubit>(context)
-                        .deleteCategory(
+                    final cubit = context.read<CategoryCubit>();
+                    await cubit.deleteCategory(
                       categoryId: categories[index].id,
                     );
                   },

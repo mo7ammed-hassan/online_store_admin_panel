@@ -13,16 +13,16 @@ class BuildCategoryListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CategoryCubit, CategoryState>(
       builder: (BuildContext context, state) {
-        if (state is CategoryInitial || state is GetAllCategoryLoading) {
+        if (state is CategoryLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is GetAllCategoriesSuccess) {
+        } else if (state is CategoryLoaded) {
           return CategoryListSection(categories: state.categories);
-        } else if (state is GetAllCategoriesFailure) {
+        } else if (state is CategoryError) {
           final categories =
               BlocProvider.of<CategoryCubit>(context).categoriesList;
           return categories.isNotEmpty
               ? CategoryListSection(categories: categories)
-              : Center(child: Text('Error: ${state.message}'));
+              : Center(child: Text('Error: ${state.errorMessage}'));
         } else {
           final categories =
               BlocProvider.of<CategoryCubit>(context).categoriesList;
@@ -31,21 +31,17 @@ class BuildCategoryListSection extends StatelessWidget {
               : const Center(child: CircularProgressIndicator());
         }
       },
-      listener: (BuildContext context, Object? state) {
-        if (state is AddCategorySuccess) {
-          showTopSnackBar(context, 'Add Category Success');
+      listener: (BuildContext context, CategoryState state) {
+        if (state is CategoryOperationSuccess) {
+          showTopSnackBar(context, state.message);
+        } else if (state is CategoryOperationSuccess) {
+          showTopSnackBar(context, 'Operation Failed: ${state.message}');
         }
-        if (state is UpdateCategorySuccess) {
-          showTopSnackBar(context, 'Update Category Success');
+
+        // Refresh the list if an operation succeeded
+        if (state is CategoryOperationSuccess) {
+          BlocProvider.of<CategoryCubit>(context).fetchCategories();
         }
-        if (state is DeleteCategorySuccess) {
-          showTopSnackBar(context, 'Delete Category Success');
-        }
-        // if (state is AddCategorySuccess ||
-        //     state is UpdateCategorySuccess ||
-        //     state is DeleteCategorySuccess) {
-        //   BlocProvider.of<CategoryCubit>(context).getAllCategories();
-        // }
       },
     );
   }

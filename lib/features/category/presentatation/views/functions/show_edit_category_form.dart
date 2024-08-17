@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
@@ -7,12 +6,13 @@ import 'package:ecommerce_app_admin_panel/core/widgets/item_submit_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void showEditCategoyAlertDialog(
+void showEditCategoryAlertDialog(
   BuildContext context, {
   required CategoryEntity category,
 }) {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController categoryNameController = TextEditingController();
+  final TextEditingController categoryNameController =
+      TextEditingController(text: category.name);
 
   showDialog(
     context: context,
@@ -21,7 +21,7 @@ void showEditCategoyAlertDialog(
         backgroundColor: secondaryColor,
         title: Center(
           child: Text(
-            'Add Category'.toUpperCase(),
+            'Edit Category'.toUpperCase(),
             style: const TextStyle(
               color: primaryColor,
             ),
@@ -30,18 +30,18 @@ void showEditCategoyAlertDialog(
         content: BlocProvider.value(
           value: BlocProvider.of<CategoryCubit>(context),
           child: ItemSubmitForm(
+            category: category,
             formKey: formKey,
             itemNameController: categoryNameController,
             onSubmit: (String categoryName, File? image) async {
-              // Trigger the Bloc event here with the category name and image
               await BlocProvider.of<CategoryCubit>(context).updateCategory(
                 categoryId: category.id,
-                data: {
-                  'name': categoryName,
-                  'image': image ?? category.categoryImage,
-                },
+                name: categoryName,
+                imagePath: image?.path ?? category.imageUrl,
               );
-            }, lableText: 'Category',
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            lableText: 'Category',
           ),
         ),
         actions: [

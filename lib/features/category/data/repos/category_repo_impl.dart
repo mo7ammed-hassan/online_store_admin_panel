@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
@@ -13,11 +11,11 @@ class CategoryRepoImpl extends CategoryRepo {
   CategoryRepoImpl(this._source);
 
   @override
-  Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
+  Future<Either<Failure, List<CategoryEntity>>> fetchCategories() async {
     try {
-      List<CategoryEntity> categoryList = await _source.getCategories();
+      List<CategoryEntity> categoriesList = await _source.fetchCategories();
 
-      return right(categoryList);
+      return right(categoriesList);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioExeption(e));
@@ -42,43 +40,52 @@ class CategoryRepoImpl extends CategoryRepo {
   }
 
   @override
-  Future<Either<Failure, CategoryEntity>> addCategories(
-      {required String name, required File? imageFile}) async {
+  Future<Either<Failure, CategoryEntity>> addCategory({
+    required String name,
+    required String imagePath,
+  }) async {
     try {
       return right(
-          await _source.addCategories(name: name, imageFile: imageFile!));
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioExeption(e));
-      }
-      return left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> deleteCategories(
-      {required String categoryId}) async {
-    try {
-      return right(await _source.deleteCategories(categoryId: categoryId));
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioExeption(e));
-      }
-      return left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, CategoryEntity>> updateCategories(
-      {required String categoryId,
-      required Map<String, dynamic> category}) async {
-    try {
-      return right(
-        await _source.updateCategories(
-          categoryId: categoryId,
-          category: category,
+        await _source.addCategory(
+          name: name,
+          imagePath: imagePath,
         ),
       );
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioExeption(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CategoryEntity>> updateCategory({
+    required String categoryId,
+    required String name,
+    required String imagePath,
+  }) async {
+    try {
+      CategoryEntity categoryUpdated = await _source.updateCategory(
+        categoryId: categoryId,
+        name: name,
+        imagePath: imagePath,
+      );
+      return right(categoryUpdated);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioExeption(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCategory({
+    required String categoryId,
+  }) async {
+    try {
+      return right(await _source.deleteCategory(categoryId: categoryId));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioExeption(e));

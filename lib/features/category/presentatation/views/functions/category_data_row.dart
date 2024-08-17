@@ -15,7 +15,7 @@ DataRow categoyDataRow({
         Row(
           children: [
             CachedNetworkImage(
-              imageUrl: category!.categoryImage,
+              imageUrl: category!.imageUrl,
               placeholder: (context, url) => const Padding(
                 padding: EdgeInsets.all(10),
                 child: CircularProgressIndicator(
@@ -32,7 +32,7 @@ DataRow categoyDataRow({
                 horizontal: defaultPadding,
               ),
               child: Text(
-                category.categoryName,
+                category.name,
                 style: const TextStyle(fontSize: 17),
               ),
             )

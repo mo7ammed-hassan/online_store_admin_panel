@@ -19,7 +19,7 @@ class CategoryView extends StatelessWidget {
     return BlocProvider(
       create: (context) => CategoryCubit(
         getIt.get<CategoryUseCaseImp>(),
-      )..getAllCategories(),
+      )..fetchCategories(), // Fetch categories when the view is built
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(defaultPadding),
@@ -38,8 +38,10 @@ class CategoryView extends StatelessWidget {
                     context,
                     onSubmit: (String categoryName, File? image) async {
                       if (image != null) {
-                        await BlocProvider.of<CategoryCubit>(context)
-                            .addCategory(name: categoryName, imageFile: image);
+                        await context.read<CategoryCubit>().addCategory(
+                              name: categoryName,
+                              imagePath: image.path,
+                            );
                       } else {
                         errorShowDialog(context);
                       }
@@ -47,7 +49,8 @@ class CategoryView extends StatelessWidget {
                   );
                 },
                 refreshOnTap: () async {
-                  // triger gell all categories
+                  final cubit = context.read<CategoryCubit>();
+                  await cubit.fetchCategories(); // Refresh the category list
                 },
               ),
               const SizedBox(height: 20),

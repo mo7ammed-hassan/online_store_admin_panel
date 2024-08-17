@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/styles/confirm_eleveted_button_style.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/alert_dialog_content_decoration.dart';
@@ -103,7 +105,7 @@ class _CouponSubmitFormState extends State<CouponSubmitForm> {
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2100),
                     onDateSelected: (DateTime date) {
-                      print('Selected Date: $date');
+                      log('Selected Date: $date');
                     },
                   ),
                 ),
