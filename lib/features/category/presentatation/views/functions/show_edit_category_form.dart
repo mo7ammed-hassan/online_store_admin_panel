@@ -27,22 +27,19 @@ void showEditCategoryAlertDialog(
             ),
           ),
         ),
-        content: BlocProvider.value(
-          value: BlocProvider.of<CategoryCubit>(context),
-          child: ItemSubmitForm(
-            category: category,
-            formKey: formKey,
-            itemNameController: categoryNameController,
-            onSubmit: (String categoryName, File? image) async {
-              await BlocProvider.of<CategoryCubit>(context).updateCategory(
-                categoryId: category.id,
-                name: categoryName,
-                imagePath: image?.path ?? category.imageUrl,
-              );
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            lableText: 'Category',
-          ),
+        content: ItemSubmitForm(
+          category: category,
+          formKey: formKey,
+          itemNameController: categoryNameController,
+          onSubmit: (String categoryName, File? image) {
+            BlocProvider.of<CategoryCubit>(context).updateCategory(
+              categoryId: category.id,
+              name: categoryName,
+              imagePath: image?.path ?? category.imageUrl,
+            );
+            Navigator.of(context).pop(); // Close the dialog
+          },
+          lableText: 'Category',
         ),
         actions: [
           TextButton(

@@ -77,7 +77,6 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
       'name': name,
       'img': await MultipartFile.fromFile(imagePath),
     });
-
     final categoryUpdated = await _service.updateItem(
       endPoint: 'categories',
       itemId: categoryId,

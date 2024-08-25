@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 
 import 'package:ecommerce_app_admin_panel/core/utils/constants/api_constants.dart';
@@ -25,12 +24,11 @@ class ApiService {
   //add items
   Future<Map<String, dynamic>> addItem({
     required String endPoint,
-    required dynamic itemData,
+    required FormData itemData,
   }) async {
     Response response = await dio.post(
       '$baseUrl$endPoint',
       data: itemData,
-      options: Options(headers: {'Content-Type': 'application/json'}),
     );
 
     return response.data;
@@ -40,7 +38,7 @@ class ApiService {
   Future<Map<String, dynamic>> updateItem({
     required String endPoint,
     required itemId,
-    required dynamic itemData,
+    required FormData itemData,
   }) async {
     Response response =
         await dio.put('$baseUrl$endPoint/$itemId', data: itemData);

@@ -18,10 +18,12 @@ class CategoryByIdLoaded extends CategoryState {
 
 class CategoryOperationSuccess extends CategoryState {
   final String message;
-  CategoryOperationSuccess(this.message);
+  final List<CategoryEntity> categories;
+
+  CategoryOperationSuccess(this.message, this.categories);
 }
 
-class CategoryError extends CategoryState {
+class CategoryFailure extends CategoryState {
   final String errorMessage;
-  CategoryError(this.errorMessage);
+  CategoryFailure(this.errorMessage);
 }

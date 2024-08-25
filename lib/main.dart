@@ -24,7 +24,7 @@ class OnlineStore extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => CategoryCubit(
         getIt.get<CategoryUseCaseImp>(),
-      ),
+      )..fetchCategories(),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'ECommerce Admin Panel',

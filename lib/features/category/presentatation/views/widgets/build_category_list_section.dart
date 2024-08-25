@@ -14,10 +14,16 @@ class BuildCategoryListSection extends StatelessWidget {
     return BlocConsumer<CategoryCubit, CategoryState>(
       builder: (BuildContext context, state) {
         if (state is CategoryLoading) {
-          return const Center(child: CircularProgressIndicator());
+          final categories =
+              BlocProvider.of<CategoryCubit>(context).categoriesList;
+          return categories.isNotEmpty
+              ? CategoryListSection(categories: categories)
+              : const Center(child: CircularProgressIndicator());
         } else if (state is CategoryLoaded) {
           return CategoryListSection(categories: state.categories);
-        } else if (state is CategoryError) {
+        } else if (state is CategoryOperationSuccess) {
+          return CategoryListSection(categories: state.categories);
+        } else if (state is CategoryFailure) {
           final categories =
               BlocProvider.of<CategoryCubit>(context).categoriesList;
           return categories.isNotEmpty
@@ -34,13 +40,6 @@ class BuildCategoryListSection extends StatelessWidget {
       listener: (BuildContext context, CategoryState state) {
         if (state is CategoryOperationSuccess) {
           showTopSnackBar(context, state.message);
-        } else if (state is CategoryOperationSuccess) {
-          showTopSnackBar(context, 'Operation Failed: ${state.message}');
-        }
-
-        // Refresh the list if an operation succeeded
-        if (state is CategoryOperationSuccess) {
-          BlocProvider.of<CategoryCubit>(context).fetchCategories();
         }
       },
     );

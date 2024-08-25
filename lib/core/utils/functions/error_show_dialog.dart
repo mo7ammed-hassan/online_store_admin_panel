@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-Future<dynamic> errorShowDialog(BuildContext context) {
+Future<dynamic> errorShowDialog(BuildContext context,{required String message}) {
   return showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text('Error'),
-                    content: const Text('Please select an image.'),
+                    content:  Text(message),
                     actions: [
                       TextButton(
                         onPressed: () {

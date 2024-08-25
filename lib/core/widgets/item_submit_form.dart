@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
-import 'package:ecommerce_app_admin_panel/core/utils/helper/snak_bar_helper.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/styles/confirm_eleveted_button_style.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/alert_dialog_content_decoration.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
@@ -38,8 +37,6 @@ class _ItemSubmitFormState extends State<ItemSubmitForm> {
       setState(() {
         selectedImage = File(pickedFile.path);
       });
-    } else {
-      showTopSnackBar(context, 'Please add image');
     }
   }
 

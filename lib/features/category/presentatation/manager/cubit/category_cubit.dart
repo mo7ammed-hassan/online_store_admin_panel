@@ -19,9 +19,9 @@ class CategoryCubit extends Cubit<CategoryState> {
         await _categoryUse.callFetchCategories();
 
     categoriesResult.fold(
-      (failure) => emit(CategoryError(failure.message)),
+      (failure) => emit(CategoryFailure(failure.message)),
       (categories) {
-        categoriesList = List.from(categories); // Ensure a fresh list is used
+        categoriesList = List.from(categories);
         emit(CategoryLoaded(categoriesList));
       },
     );
@@ -34,7 +34,7 @@ class CategoryCubit extends Cubit<CategoryState> {
         await _categoryUse.callGetCategoryById(categoryId: categoryId);
 
     categoryResult.fold(
-      (failure) => emit(CategoryError(failure.message)),
+      (failure) => emit(CategoryFailure(failure.message)),
       (category) => emit(CategoryByIdLoaded(category)),
     );
   }
@@ -43,6 +43,8 @@ class CategoryCubit extends Cubit<CategoryState> {
     required String name,
     required String imagePath,
   }) async {
+    emit(CategoryLoading());
+
     final Either<Failure, CategoryEntity> addResult =
         await _categoryUse.callAddCategory(
       name: name,
@@ -50,11 +52,15 @@ class CategoryCubit extends Cubit<CategoryState> {
     );
 
     addResult.fold(
-      (failure) => emit(CategoryError(failure.message)),
+      (failure) => emit(CategoryFailure(failure.message)),
       (category) async {
         categoriesList.add(category);
-        emit(CategoryOperationSuccess("Category added successfully."));
-        await fetchCategories(); // Refresh the list
+        emit(
+          CategoryOperationSuccess(
+            "Category added successfully.",
+            categoriesList,
+          ),
+        );
       },
     );
   }
@@ -74,15 +80,24 @@ class CategoryCubit extends Cubit<CategoryState> {
     );
 
     updateResult.fold(
-      (failure) => emit(CategoryError(failure.message)),
+      (failure) {
+        emit(CategoryFailure(failure.message));
+      },
       (updatedCategory) async {
-        final index = categoriesList.indexWhere((category) => category.id == categoryId);
+        final index =
+            categoriesList.indexWhere((category) => category.id == categoryId);
         if (index != -1) {
           categoriesList[index] = updatedCategory;
-          emit(CategoryOperationSuccess("Category updated successfully."));
-          await fetchCategories(); // Refresh the list
+          emit(
+            CategoryOperationSuccess(
+              "Category updated successfully.",
+              categoriesList,
+            ),
+          );
         } else {
-          emit(CategoryError('Category not found in the list'));
+          emit(
+            CategoryFailure('Category not found in the list'),
+          );
         }
       },
     );
@@ -95,11 +110,15 @@ class CategoryCubit extends Cubit<CategoryState> {
         await _categoryUse.callDeleteCategory(categoryId: categoryId);
 
     deleteResult.fold(
-      (failure) => emit(CategoryError(failure.message)),
+      (failure) => emit(CategoryFailure(failure.message)),
       (_) async {
         categoriesList.removeWhere((category) => category.id == categoryId);
-        emit(CategoryOperationSuccess("Category deleted successfully."));
-        await fetchCategories(); // Refresh the list
+        emit(
+          CategoryOperationSuccess(
+            "Category deleted successfully.",
+            categoriesList,
+          ),
+        );
       },
     );
   }
