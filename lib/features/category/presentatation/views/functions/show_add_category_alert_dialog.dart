@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
-import 'package:ecommerce_app_admin_panel/core/utils/functions/error_show_dialog.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/item_submit_form.dart';
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +28,9 @@ void showAddCategoyAlertDialog(
           formKey: formKey,
           itemNameController: categoryNameController,
           onSubmit: (String categoryName, File? image) {
-            if (image != null) {
-              final cubit = context.read<CategoryCubit>();
-              cubit.addCategory(name: categoryName, imagePath: image.path);
-              Navigator.pop(context);
-            } else {
-              errorShowDialog(context, message: 'Please select an image.');
-            }
+            final cubit = context.read<CategoryCubit>();
+            cubit.addCategory(name: categoryName, imagePath: image!.path);
+            Navigator.pop(context);
           },
           lableText: 'Category',
         ),

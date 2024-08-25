@@ -48,18 +48,6 @@ class CategoryListSection extends StatelessWidget {
                     await cubit.deleteCategory(
                       categoryId: categories[index].id,
                     );
-
-                    // await cubit.updateCategory(
-                    //     categoryId: categories[index].id,
-                    //     name: 'new category',
-                    //     imagePath:
-                    //         "E:/Users/Mohamed Hassan/Desktop/code31.png");
-
-                    // await cubit.addCategory(
-                    //     // categoryId: categories[index].id,
-                    //     name: 'add category',
-                    //     imagePath:
-                    //         "E:/Users/Mohamed Hassan/Desktop/code31.png");
                   },
                 ),
               ),

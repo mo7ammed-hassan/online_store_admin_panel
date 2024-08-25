@@ -35,7 +35,7 @@ void showEditCategoryAlertDialog(
             BlocProvider.of<CategoryCubit>(context).updateCategory(
               categoryId: category.id,
               name: categoryName,
-              imagePath: image?.path ?? category.imageUrl,
+              imagePath: image!.path,
             );
             Navigator.of(context).pop(); // Close the dialog
           },

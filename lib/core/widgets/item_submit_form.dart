@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/functions/error_show_dialog.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/styles/confirm_eleveted_button_style.dart';
 import 'package:ecommerce_app_admin_panel/core/widgets/alert_dialog_content_decoration.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
@@ -19,7 +20,7 @@ class ItemSubmitForm extends StatefulWidget {
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController itemNameController;
-  final Function(String itemName, File? image) onSubmit; //  callback
+  final Function(String itemName, File? image) onSubmit;
   final String lableText;
   final CategoryEntity? category;
 
@@ -47,6 +48,12 @@ class _ItemSubmitFormState extends State<ItemSubmitForm> {
   }
 
   @override
+  void dispose() {
+    widget.itemNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: widget.formKey,
@@ -71,16 +78,9 @@ class _ItemSubmitFormState extends State<ItemSubmitForm> {
                                 image: FileImage(selectedImage!),
                                 fit: BoxFit.contain,
                               )
-                            : widget.category != null
-                                ? DecorationImage(
-                                    image:
-                                        NetworkImage(widget.category!.imageUrl),
-                                    fit: BoxFit.contain,
-                                  )
-                                : null,
+                            : null,
                       ),
-                      child: (selectedImage == null &&
-                              widget.category?.imageUrl == null)
+                      child: (selectedImage == null)
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -138,10 +138,17 @@ class _ItemSubmitFormState extends State<ItemSubmitForm> {
               style: confirmElevatedButtonStyle(),
               onPressed: () {
                 if (widget.formKey.currentState!.validate()) {
-                  widget.onSubmit(
-                    widget.itemNameController.text,
-                    selectedImage,
-                  );
+                  if (selectedImage != null) {
+                    widget.onSubmit(
+                      widget.itemNameController.text,
+                      selectedImage,
+                    );
+                  } else {
+                    errorShowDialog(
+                      context,
+                      message: 'Please select an image.',
+                    );
+                  }
                 }
               },
               child: const Text(
