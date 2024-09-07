@@ -37,14 +37,7 @@ DataRow subCategoryDataRow({
         ),
       ),
       DataCell(
-        BlocBuilder<CategoryCubit, CategoryState>(
-          builder: (context, state) {
-            if (state is CategoryByIdLoaded) {
-              return Text(state.category.name);
-            }
-            return Text(subCategory.categoryId);
-          },
-        ),
+        Text(subCategory.categoryId),
       ),
       DataCell(
         Text(

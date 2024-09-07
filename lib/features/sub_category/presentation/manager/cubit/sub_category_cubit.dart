@@ -13,7 +13,6 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
   List<SubCategoryEntity> subCategoriesFilter = [];
   CategoryEntity? selectedItem;
   TextEditingController nameController = TextEditingController();
-  // formkey
   final GlobalKey<FormState> formKey = GlobalKey();
 
   Future<void> fetchSubCategories() async {

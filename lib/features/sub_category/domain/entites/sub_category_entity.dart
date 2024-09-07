@@ -15,7 +15,7 @@ class SubCategoryEntity {
 
   factory SubCategoryEntity.fromJson(Map<String, dynamic> json) {
     return SubCategoryEntity(
-      id: json['_id'], // Assumes MongoDB's default '_id' field
+      id: json['_id'],
       name: json['name'],
       categoryId: json['categoryId'],
       createdAt: json['createdAt'],
