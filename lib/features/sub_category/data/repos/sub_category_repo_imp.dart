@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/data/data_sources/sub_category_remote_data_source.dart';
-import 'package:ecommerce_app_admin_panel/features/sub_category/data/models/sub_category_data.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/domain/entites/sub_category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/domain/repos/sub_category_repo.dart';
 
@@ -11,9 +10,9 @@ class SubCategoryRepoImp extends SubCategoryRepo {
 
   SubCategoryRepoImp(this._dataSource);
   @override
-  Future<Either<Failure, List<Data>>> fetchSubCategories() async {
+  Future<Either<Failure, List<SubCategoryEntity>>> fetchSubCategories() async {
     try {
-      List<Data> subCategoies =
+      List<SubCategoryEntity> subCategoies =
           await _dataSource.fetchSubCategories();
       return right(subCategoies);
     } catch (e) {

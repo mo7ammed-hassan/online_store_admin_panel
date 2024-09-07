@@ -1,6 +1,5 @@
 import 'package:ecommerce_app_admin_panel/core/utils/services/api_services.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/services/helper/get_sub_category_list.dart';
-import 'package:ecommerce_app_admin_panel/features/sub_category/data/models/sub_category_data.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/domain/entites/sub_category_entity.dart';
 
 abstract class SubCategoryRemoteDataSource {
@@ -33,11 +32,11 @@ class SubCategoryRemoteDataSourceImpl extends SubCategoryRemoteDataSource {
   SubCategoryRemoteDataSourceImpl(this._service);
 
   @override
-  Future<List<Data>> fetchSubCategories() async {
+  Future<List<SubCategoryEntity>> fetchSubCategories() async {
     Map<String, dynamic> jsonData =
         await _service.getItems(endPoint: 'subCategories');
 
-    List<Data> subCategories = getSubCategoriesList(jsonData); 
+    List<SubCategoryEntity> subCategories = getSubCategoriesList(jsonData);
     return subCategories;
   }
 

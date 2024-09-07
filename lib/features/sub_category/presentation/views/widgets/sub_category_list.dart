@@ -11,6 +11,7 @@ class SubCategoryList extends StatelessWidget {
   final List<SubCategoryEntity> subCategories;
   @override
   Widget build(BuildContext context) {
+    
     return DataTable(
       columns: const [
         DataColumn(label: Text("SubCategory Name")),
