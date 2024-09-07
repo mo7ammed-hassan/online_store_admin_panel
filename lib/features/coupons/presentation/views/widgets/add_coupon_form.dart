@@ -156,10 +156,10 @@
 //                           displayItem: (category) =>
 //                               category?.name ?? '',
 //                           onChanged: (newValue) {
-                            
+
 //                           },
 //                         ),
-                     
+
 //                   ),
 //                   Expanded(
 //                     child: CustomDropdown(

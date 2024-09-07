@@ -24,7 +24,7 @@ class ApiService {
   //add items
   Future<Map<String, dynamic>> addItem({
     required String endPoint,
-    required FormData itemData,
+    required dynamic itemData,
   }) async {
     Response response = await dio.post(
       '$baseUrl$endPoint',
@@ -38,7 +38,7 @@ class ApiService {
   Future<Map<String, dynamic>> updateItem({
     required String endPoint,
     required itemId,
-    required FormData itemData,
+    required dynamic itemData,
   }) async {
     Response response =
         await dio.put('$baseUrl$endPoint/$itemId', data: itemData);

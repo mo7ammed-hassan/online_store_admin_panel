@@ -1,11 +1,18 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
+import 'package:ecommerce_app_admin_panel/features/sub_category/domain/entites/sub_category_entity.dart';
+import 'package:ecommerce_app_admin_panel/features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 DataRow subCategoryDataRow({
   required Function()? editOnTap,
-  required Function()? deleteOnTap,
   required int index,
+  required SubCategoryEntity subCategory,
+  required context,
 }) {
+  BlocProvider.of<CategoryCubit>(context)
+      .getSingleCategory(categoryId: subCategory.categoryId);
   return DataRow(
     cells: [
       DataCell(
@@ -21,19 +28,24 @@ DataRow subCategoryDataRow({
               ),
               child: Text('${index + 1}'),
             ),
-            const Padding(
-              padding: EdgeInsets.all(defaultPadding),
-              child: Text('SubCategory'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Text(subCategory.name),
             ),
           ],
         ),
       ),
       const DataCell(
-        Text('Category'),
+       
+      
+            
+               Text('state.category.name')
+            
+        
       ),
       const DataCell(
         Text(
-          'formatDate(category.createdAt)',
+          'formatDate(subCategory)',
         ),
       ),
       DataCell(
@@ -47,7 +59,10 @@ DataRow subCategoryDataRow({
       ),
       DataCell(
         IconButton(
-          onPressed: deleteOnTap,
+          onPressed: () async {
+            await BlocProvider.of<SubCategoryCubit>(context)
+                .deleteSubCategory(subCategory.id);
+          },
           icon: const Icon(
             Icons.delete,
             color: Colors.red,

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
+  final void Function(T?)? onChanged;
+  final String? Function(T?)? validator;
+  final String hintText;
+  final T? initialValue;
+  final List<T> items;
+  final String Function(T)? displayItem;
+
   const CustomDropdown({
     super.key,
     required this.onChanged,
@@ -8,12 +15,9 @@ class CustomDropdown<T> extends StatelessWidget {
     this.hintText = 'Select an option',
     this.initialValue,
     required this.items,
+    this.displayItem,
   });
-  final void Function(T?)? onChanged;
-  final String? Function(T?)? validator;
-  final String hintText;
-  final T? initialValue;
-  final List<T> items;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
@@ -30,9 +34,7 @@ class CustomDropdown<T> extends StatelessWidget {
         (T value) {
           return DropdownMenuItem<T>(
             value: value,
-            child: Text(
-              value.toString(),
-            ),
+            child: Text(displayItem!(value)),
           );
         },
       ).toList(),

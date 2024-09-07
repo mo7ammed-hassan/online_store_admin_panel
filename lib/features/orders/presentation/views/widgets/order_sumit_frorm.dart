@@ -58,7 +58,6 @@ class OrderSubmitForm extends StatelessWidget {
                   'delivered',
                   'cancelled'
                 ],
-                
                 onChanged: (newValue) {},
                 validator: (value) {
                   if (value == null) {

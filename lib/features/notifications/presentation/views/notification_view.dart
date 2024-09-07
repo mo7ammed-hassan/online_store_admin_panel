@@ -25,7 +25,6 @@ class NotificationView extends StatelessWidget {
               addNewOnTap: () {
                 showAddNotificationAlertDialog(
                   context,
-                  
                 );
               },
               refreshOnTap: () {},

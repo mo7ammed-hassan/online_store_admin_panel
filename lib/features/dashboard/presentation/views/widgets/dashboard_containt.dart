@@ -19,11 +19,9 @@ class DashboardContaint extends StatelessWidget {
           child: Column(
             children: [
               SecoundyViewHeader(
-                addNewOnTap: () {
-                 
-                },
+                addNewOnTap: () {},
                 title: 'My Products',
-               refreshOnTap: (){},
+                refreshOnTap: () {},
               ),
               const SizedBox(height: defaultPadding),
               // product summary section

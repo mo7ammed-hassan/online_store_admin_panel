@@ -10,7 +10,7 @@ class SecoundyViewHeader extends StatelessWidget {
     super.key,
     required this.title,
     this.addNewOnTap,
-    this.refreshOnTap,  
+    this.refreshOnTap,
   });
   final String title;
   final Function()? addNewOnTap;

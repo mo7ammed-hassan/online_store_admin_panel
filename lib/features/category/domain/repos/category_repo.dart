@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/helper/failure.dart';
 import 'package:ecommerce_app_admin_panel/features/category/domain/entity/category_entity.dart';
@@ -24,5 +23,4 @@ abstract class CategoryRepo {
   Future<Either<Failure, void>> deleteCategory({
     required String categoryId,
   });
-  
 }
