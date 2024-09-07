@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
+import 'package:ecommerce_app_admin_panel/core/utils/functions/format_date.dart';
 import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/domain/entites/sub_category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
@@ -45,9 +46,9 @@ DataRow subCategoryDataRow({
           },
         ),
       ),
-      const DataCell(
+      DataCell(
         Text(
-          'formatDate(subCategory)',
+          formatDate(subCategory.createdAt),
         ),
       ),
       DataCell(

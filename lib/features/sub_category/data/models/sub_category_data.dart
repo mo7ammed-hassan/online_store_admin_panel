@@ -18,6 +18,8 @@ class Data extends SubCategoryEntity {
           id: subId ?? '',
           name: subName ?? '',
           categoryId: catId?.id ?? '',
+          createdAt: subCreatedAt ?? '',
+          updatedAt: subUpdatedAt ?? '',
         );
 
   factory Data.fromJson(Map<String, dynamic> json) {
