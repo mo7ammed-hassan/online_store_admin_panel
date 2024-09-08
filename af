@@ -1,0 +1,210 @@
+[33mcommit cd7b16acabf5572b52e32db0956ee69df4ba8c62[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelopment[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Sep 8 17:28:00 2024 +0300
+
+    edit SubCategorySubmitForm
+
+[33mcommit ccb9591bc99b097653463a7af88553ebb9701cef[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Sep 8 17:26:03 2024 +0300
+
+    refactor code
+
+[33mcommit aaf2c2c2ede99e030cd4c72b4638adcd8e012d48[m[33m ([m[1;32mmain[m[33m)[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Sep 8 16:37:20 2024 +0300
+
+    update api_services
+
+[33mcommit 85d4153f3f21854faec5f39f380092e5915225c3[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Sep 8 15:36:52 2024 +0300
+
+    update show edit
+
+[33mcommit 8e470ec51ab1df048b3f0cadc31b59ff667acd90[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Sep 7 21:52:22 2024 +0300
+
+    update sub category to show id
+
+[33mcommit 2d313646b8e3d114f2b40d3e74d3f2b6d8892192[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Sep 7 21:32:26 2024 +0300
+
+    change time formate for sub category view
+
+[33mcommit 60d5cac0065333e1428d3282b438fe933d669d8b[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Sep 7 21:21:55 2024 +0300
+
+    refactor sub category view
+
+[33mcommit a72c30145474cd4e2124d9b0bd3eaf45b83de321[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Sep 7 21:11:22 2024 +0300
+
+    sd
+
+[33mcommit 7e6b790bf67cc065969ef7dd97e7d96c0c4d37d9[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Aug 25 13:27:40 2024 +0300
+
+    update on submit
+
+[33mcommit 266c6639cf816a66a54c1705fa75e44f8db68b50[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sun Aug 25 13:06:00 2024 +0300
+
+    finish category view
+
+[33mcommit 57e8d52b6fc94d62fe5dca4186f134cadb148ce7[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Aug 17 10:20:38 2024 +0300
+
+    update cubit and ui for category
+
+[33mcommit cef9b060f6d38252c36f6a67620ef21781b7efe2[m
+Merge: 9d7be86 4db42f9
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Fri Aug 16 01:17:09 2024 +0300
+
+    Merge branch 'main' of https://github.com/Mo7ammed-hassan/ecommerce_app_admin_panel
+
+[33mcommit 9d7be86cc51d1ced09cf97a7a7470697590f482d[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Fri Aug 16 01:17:05 2024 +0300
+
+    finish notification view
+
+[33mcommit 4db42f9415c89a8718dbb7c9c884fbffe1c04ea5[m
+Author: Mo7ammed-hassan <mohamed7github@gmail.com>
+Date:   Wed Aug 14 15:12:38 2024 +0300
+
+    Update README.md
+
+[33mcommit ff9170777a8500b25489101776c25746354f9a96[m
+Author: Mo7ammed-hassan <mohamed7github@gmail.com>
+Date:   Wed Aug 14 15:10:31 2024 +0300
+
+    Update README.md
+
+[33mcommit 28016fc8ebd75f4c38d7a217b26bfac46f54d48f[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Wed Aug 14 14:59:50 2024 +0300
+
+    refactor ui
+
+[33mcommit 2c382fba6fe21e5eb8427e9817fdf7019d9b7616[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 11:08:22 2024 +0300
+
+    refactor code and create to json category method
+
+[33mcommit 758066e7b8aee1404e29a09765bfd1ce83c8652c[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 10:12:22 2024 +0300
+
+    create showTopSnackBar
+
+[33mcommit 14d741aefe975048a2fe0e3cb15a85716a1cb07b[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 09:18:57 2024 +0300
+
+    trigerr cubit and add CachedNetworkImage
+
+[33mcommit 844481d761d8316c73e4a446ca6514ee37b55f32[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 08:26:34 2024 +0300
+
+    setup services
+
+[33mcommit 87645f3de914727752cf9ee8c101cd729e004d7f[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 08:25:57 2024 +0300
+
+    refactor code
+
+[33mcommit 7997b844904ecfe704071f2840d8b36aceb8427b[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 08:21:25 2024 +0300
+
+    create setup service locator
+
+[33mcommit 5983f6af7a5059282fc317a2213688e77f9a0f86[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 08:11:58 2024 +0300
+
+    crete bloc observer
+
+[33mcommit 45ac1af984b7aa6c2a3d8b04f4878d95d1c65ed6[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Aug 8 07:49:30 2024 +0300
+
+    add Failure class to handler exaption crete domain and data layer for category and crete cubit
+
+[33mcommit dd90118528a6d721fdf4abf20306dcac4389e79c[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Thu Jul 25 04:59:21 2024 +0300
+
+    test ui
+
+[33mcommit ea544478e111a569f25fe3a70e8a2fe2cb54cb2a[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 10:57:44 2024 +0300
+
+    .
+
+[33mcommit db4308d4ac04f9144ee486f350d39edb49b571ff[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 10:57:36 2024 +0300
+
+    refactor code
+
+[33mcommit 440d48fa713f12b41a9c87329cad19bb22dfc82a[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 10:53:51 2024 +0300
+
+    finish dashboard view
+
+[33mcommit f6ff4ef7815e10a4d978119c9f72c318a0fe70f6[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 08:35:34 2024 +0300
+
+    create dashboard header
+
+[33mcommit 8751c7097d2e15057ea33f3572f0226bcbb841cc[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:52:45 2024 +0300
+
+    create main view
+
+[33mcommit 8ceb6344648e5dabf80fd23fb407f6061de58aef[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:46:59 2024 +0300
+
+    add go router package
+
+[33mcommit 211e746a1bbfac6e756d5f0c139501ad12c3ae33[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:43:40 2024 +0300
+
+    remove git package
+
+[33mcommit 7cfd5b816b4b92c21e9e707607ddcffd1a3d758c[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:39:29 2024 +0300
+
+    add features and git package
+
+[33mcommit 3004e96cf46d02de553f285a98be0336fda86cfc[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:31:22 2024 +0300
+
+    add assets folder
+
+[33mcommit 2892bc7f9b864a6192173201fed5b78e69dc7f28[m
+Author: mohamedhassan <mohamed7github@gmail.com>
+Date:   Sat Jul 20 06:29:30 2024 +0300
+
+    first commit

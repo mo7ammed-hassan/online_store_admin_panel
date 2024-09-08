@@ -28,12 +28,7 @@ class EditSubCategorySubmitForm extends StatelessWidget {
 
     CategoryEntity? selectedItem = subCategoryCubit.selectedItem;
 
-    if (selectedItem == null) {
-      selectedItem = categories.firstWhere(
-        (category) => category.id == subCategoryEntity.id,
-      );
-      subCategoryCubit.updateSelectedItem(selectedItem);
-    }
+    subCategoryCubit.updateSelectedItem(selectedItem);
 
     GlobalKey<FormState> formKey = subCategoryCubit.formKey;
 
@@ -61,7 +56,7 @@ class EditSubCategorySubmitForm extends StatelessWidget {
                         }
                         return null;
                       },
-                      hintText: selectedItem.name,
+                      hintText: selectedItem?.name ?? subCategoryEntity.name,
                       initialValue: selectedItem,
                       items: categories,
                       displayItem: (CategoryEntity? category) =>
@@ -82,12 +77,11 @@ class EditSubCategorySubmitForm extends StatelessWidget {
                 style: confirmElevatedButtonStyle(),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    if (subCategoryNameController.text.isNotEmpty &&
-                        selectedItem != null) {
+                    if (subCategoryNameController.text.isNotEmpty) {
                       subCategoryCubit.updateSubCategory(
                         subCategoryId: subCategoryEntity.id,
                         name: subCategoryNameController.text,
-                        categoryId: selectedItem.id,
+                        categoryId: selectedItem?.id ?? subCategoryEntity.categoryId.id!,
                       );
 
                       Navigator.pop(context);
