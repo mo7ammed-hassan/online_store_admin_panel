@@ -48,14 +48,28 @@ class EditSubCategorySubmitForm extends StatelessWidget {
     required this.subCategoryEntity,
   });
   final SubCategoryEntity subCategoryEntity;
+
   @override
   Widget build(BuildContext context) {
     List<CategoryEntity> categories =
         BlocProvider.of<CategoryCubit>(context).categoriesList;
     final subCategoryCubit = BlocProvider.of<SubCategoryCubit>(context);
+
+    // Initialize the text controller and selected item
     TextEditingController subCategoryNameController =
-        subCategoryCubit.nameController;
+        TextEditingController(text: subCategoryEntity.name);
+
+    // Get the selected item from the cubit
     CategoryEntity? selectedItem = subCategoryCubit.selectedItem;
+
+    // Ensure the selectedItem is initialized
+    if (selectedItem == null) {
+      selectedItem = categories.firstWhere(
+        (category) => category.id == subCategoryEntity.categoryId,
+      );
+      subCategoryCubit.updateSelectedItem(selectedItem);
+    }
+
     GlobalKey<FormState> formKey = subCategoryCubit.formKey;
 
     return SingleChildScrollView(
@@ -78,24 +92,22 @@ class EditSubCategorySubmitForm extends StatelessWidget {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return 'Please select a Sub Category';
+                          return 'Please select a category';
                         }
                         return null;
                       },
-                      hintText: selectedItem?.name ?? 'selected',
+                      hintText: selectedItem.name,
                       initialValue: selectedItem,
                       items: categories,
                       displayItem: (CategoryEntity? category) =>
                           category?.name ?? '',
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: CustomBrandTextFormField(
                       controller: subCategoryNameController,
-                      labelText: 'Brand Name',
+                      labelText: 'Sub Category Name',
                     ),
                   ),
                 ],
@@ -105,15 +117,21 @@ class EditSubCategorySubmitForm extends StatelessWidget {
                 style: confirmElevatedButtonStyle(),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    if (subCategoryNameController.text.isNotEmpty) {
+                    if (subCategoryNameController.text.isNotEmpty &&
+                        selectedItem != null) {
                       subCategoryCubit.updateSubCategory(
                         subCategoryId: subCategoryEntity.id,
                         name: subCategoryNameController.text,
-                        categoryId: subCategoryCubit.selectedItem?.id ??
-                            subCategoryEntity.categoryId,
+                        categoryId: selectedItem.id,
                       );
 
                       Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Please select a category to update.')),
+                      );
                     }
                   }
                 },
