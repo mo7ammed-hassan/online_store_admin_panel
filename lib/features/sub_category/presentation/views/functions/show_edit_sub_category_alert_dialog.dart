@@ -55,14 +55,11 @@ class EditSubCategorySubmitForm extends StatelessWidget {
         BlocProvider.of<CategoryCubit>(context).categoriesList;
     final subCategoryCubit = BlocProvider.of<SubCategoryCubit>(context);
 
-    // Initialize the text controller and selected item
     TextEditingController subCategoryNameController =
         TextEditingController(text: subCategoryEntity.name);
 
-    // Get the selected item from the cubit
     CategoryEntity? selectedItem = subCategoryCubit.selectedItem;
 
-    // Ensure the selectedItem is initialized
     if (selectedItem == null) {
       selectedItem = categories.firstWhere(
         (category) => category.id == subCategoryEntity.categoryId,
@@ -129,8 +126,8 @@ class EditSubCategorySubmitForm extends StatelessWidget {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content:
-                                Text('Please select a category to update.')),
+                          content: Text('Please select a category to update.'),
+                        ),
                       );
                     }
                   }

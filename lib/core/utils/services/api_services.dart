@@ -41,7 +41,7 @@ class ApiService {
     required dynamic itemData,
   }) async {
     Response response =
-        await dio.put('$baseUrl$endPoint/$itemId', data: itemData);
+        await dio.patch('$baseUrl$endPoint/$itemId', data: itemData);
     return response.data;
   }
 
