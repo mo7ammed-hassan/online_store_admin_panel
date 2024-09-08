@@ -17,7 +17,7 @@ class Data extends SubCategoryEntity {
   }) : super(
           id: subId ?? '',
           name: subName ?? '',
-          categoryId: catId?.id ?? '',
+          categoryId: catId!,
           createdAt: subCreatedAt ?? '',
           updatedAt: subUpdatedAt ?? '',
         );

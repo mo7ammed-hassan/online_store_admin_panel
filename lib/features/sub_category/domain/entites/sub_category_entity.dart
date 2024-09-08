@@ -1,7 +1,11 @@
+
+
+import 'package:ecommerce_app_admin_panel/features/sub_category/data/models/category_id.dart';
+
 class SubCategoryEntity {
   final String id;
   final String name;
-  final String categoryId;
+  final CategoryId categoryId;
   final String createdAt;
   final String updatedAt;
 

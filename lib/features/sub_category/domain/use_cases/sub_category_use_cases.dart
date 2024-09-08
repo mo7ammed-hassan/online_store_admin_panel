@@ -8,11 +8,11 @@ abstract class SubCategoryUseCases {
   Future<Either<Failure, SubCategoryEntity>> callGetSubCategoryById(
     String subCategoryId,
   );
-  Future<Either<Failure, SubCategoryEntity>> callAddSubCategory({
+  Future<Either<Failure, void>> callAddSubCategory({
     required String name,
     required String categoryId,
   });
-  Future<Either<Failure, SubCategoryEntity>> callUpdateSubCategory({
+  Future<Either<Failure, void>> callUpdateSubCategory({
     required String name,
     required String categoryId,
     required String subCategoryId,
@@ -39,7 +39,7 @@ class SubCategoryUseCaseImpl extends SubCategoryUseCases {
   }
 
   @override
-  Future<Either<Failure, SubCategoryEntity>> callAddSubCategory({
+  Future<Either<Failure, void>> callAddSubCategory({
     required String name,
     required String categoryId,
   }) {
@@ -50,7 +50,7 @@ class SubCategoryUseCaseImpl extends SubCategoryUseCases {
   }
 
   @override
-  Future<Either<Failure, SubCategoryEntity>> callUpdateSubCategory({
+  Future<Either<Failure, void>> callUpdateSubCategory({
     required String name,
     required String categoryId,
     required String subCategoryId,

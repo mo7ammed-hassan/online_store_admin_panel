@@ -54,8 +54,9 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
         emit(SubCategoriesFailure(failure.toString()));
       },
       (newSubCategory) {
-        subCategoriesList.add(newSubCategory);
-        emit(SubCategoriesLoaded(subCategoriesList));
+        //subCategoriesList.add(newSubCategory);
+        fetchSubCategories();
+       // emit(SubCategoriesLoaded(subCategoriesList));
         nameController.clear();
       },
     );
@@ -78,16 +79,17 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
         emit(SubCategoriesFailure(failure.toString()));
       },
       (updatedSubCategory) {
-        final index = subCategoriesList.indexWhere(
-          (element) => element.id == subCategoryId,
-        );
-        if (index != -1) {
-          subCategoriesList[index] = updatedSubCategory;
-          emit(SubCategoriesLoaded(subCategoriesList));
-          nameController.clear();
-        } else {
-          emit(SubCategoriesFailure("Sub category not found"));
-        }
+        // final index = subCategoriesList.indexWhere(
+        //   (element) => element.id == subCategoryId,
+        // );
+        // if (index != -1) {
+        //   //subCategoriesList[index] = updatedSubCategory;
+        // emit(SubCategoriesLoaded(subCategoriesList));
+        fetchSubCategories();
+        nameController.clear();
+        // } else {
+        //   emit(SubCategoriesFailure("Sub category not found"));
+        // }
       },
     );
   }

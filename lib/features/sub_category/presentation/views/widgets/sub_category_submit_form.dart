@@ -10,20 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubCategorySubmitForm extends StatelessWidget {
-  const SubCategorySubmitForm({
-    super.key,
-  });
+  const SubCategorySubmitForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<CategoryEntity> categories =
-        BlocProvider.of<CategoryCubit>(context).categoriesList;
-    TextEditingController subCategoryNameController =
-        BlocProvider.of<SubCategoryCubit>(context).nameController;
-    CategoryEntity? selectedItem =
-        BlocProvider.of<SubCategoryCubit>(context).selectedItem;
-    GlobalKey<FormState> formKey =
-        BlocProvider.of<SubCategoryCubit>(context).formKey;
+    final subCategoryCubit = BlocProvider.of<SubCategoryCubit>(context);
+    final categoryCubit = BlocProvider.of<CategoryCubit>(context);
+    final categories = categoryCubit.categoriesList;
+    final formKey = subCategoryCubit.formKey;
+    final subCategoryNameController = subCategoryCubit.nameController;
+    final selectedItem = subCategoryCubit.selectedItem;
+
     return SingleChildScrollView(
       child: Form(
         key: formKey,
@@ -38,60 +35,40 @@ class SubCategorySubmitForm extends StatelessWidget {
                   Expanded(
                     child: BlocBuilder<SubCategoryCubit, SubCategoryState>(
                       builder: (context, state) {
+                        CategoryEntity? dropdownSelectedItem = selectedItem;
                         if (state is SelectedItemChanged) {
-                          return CustomDropdown<CategoryEntity>(
-                            onChanged: (newVal) {
-                              if (newVal != null) {
-                                selectedItem = newVal;
-                              }
-                            },
-                            validator: (value) {
-                              if (value == null) {
-                                return 'Please select a Sub Category';
-                              }
-                              return null;
-                            },
-                            hintText:
-                                state.selectedItem?.name ?? 'Selected category',
-                            initialValue: state.selectedItem,
-                            items: categories,
-                            displayItem: (CategoryEntity? category) =>
-                                category?.name ?? '',
-                          );
-                        } else {
-                          return CustomDropdown<CategoryEntity>(
-                            onChanged: (newVal) {
-                              if (newVal != null) {
-                                selectedItem = newVal;
-                              }
-                            },
-                            validator: (value) {
-                              if (value == null) {
-                                return 'Please select a Sub Category';
-                              }
-                              return null;
-                            },
-                            hintText: selectedItem?.name ?? 'Selected category',
-                            initialValue: selectedItem,
-                            items: categories,
-                            displayItem: (CategoryEntity? category) =>
-                                category?.name ?? '',
-                          );
+                          dropdownSelectedItem = state.selectedItem;
                         }
+
+                        return CustomDropdown<CategoryEntity>(
+                          onChanged: (newVal) {
+                            if (newVal != null) {
+                              subCategoryCubit.updateSelectedItem(newVal);
+                            }
+                          },
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select a category';
+                            }
+                            return null;
+                          },
+                          hintText: dropdownSelectedItem?.name ?? 'Select a category',
+                          initialValue: dropdownSelectedItem,
+                          items: categories,
+                          displayItem: (CategoryEntity? category) => category?.name ?? '',
+                        );
                       },
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: CustomBrandTextFormField(
-                      onSaved: (p1) {
+                      onSaved: (value) {
                         subCategoryNameController.clear();
                         subCategoryNameController.dispose();
                       },
                       controller: subCategoryNameController,
-                      labelText: 'Brand Name',
+                      labelText: 'Sub Category Name',
                     ),
                   ),
                 ],
@@ -101,12 +78,18 @@ class SubCategorySubmitForm extends StatelessWidget {
                 style: confirmElevatedButtonStyle(),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    if (subCategoryNameController.text.isNotEmpty) {
-                      BlocProvider.of<SubCategoryCubit>(context).addSubCategory(
+                    if (subCategoryNameController.text.isNotEmpty && selectedItem != null) {
+                      subCategoryCubit.addSubCategory(
                         name: subCategoryNameController.text,
                         categoryId: selectedItem!.id,
                       );
                       Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please select a category.'),
+                        ),
+                      );
                     }
                   }
                 },

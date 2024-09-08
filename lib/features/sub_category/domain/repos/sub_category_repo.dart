@@ -7,11 +7,11 @@ abstract class SubCategoryRepo {
   Future<Either<Failure, SubCategoryEntity>> getSubCategoryById(
     String subCategoryId,
   );
-  Future<Either<Failure, SubCategoryEntity>> addSubCategory({
+  Future<Either<Failure, void>> addSubCategory({
     required String name,
     required String categoryId,
   });
-  Future<Either<Failure, SubCategoryEntity>> updateSubCategory({
+  Future<Either<Failure, void>> updateSubCategory({
     required String name,
     required String subCategoryId,
     required String categoryId,

@@ -43,7 +43,7 @@ class SubCategoryRepoImp extends SubCategoryRepo {
   }
 
   @override
-  Future<Either<Failure, SubCategoryEntity>> addSubCategory(
+  Future<Either<Failure, void>> addSubCategory(
       {required String name, required String categoryId}) async {
     try {
       return right(
@@ -61,7 +61,7 @@ class SubCategoryRepoImp extends SubCategoryRepo {
   }
 
   @override
-  Future<Either<Failure, SubCategoryEntity>> updateSubCategory({
+  Future<Either<Failure, void>> updateSubCategory({
     required String name,
     required String categoryId,
     required String subCategoryId,

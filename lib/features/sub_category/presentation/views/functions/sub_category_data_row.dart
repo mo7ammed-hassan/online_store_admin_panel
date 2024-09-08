@@ -1,6 +1,5 @@
 import 'package:ecommerce_app_admin_panel/core/utils/constants/constants.dart';
 import 'package:ecommerce_app_admin_panel/core/utils/functions/format_date.dart';
-import 'package:ecommerce_app_admin_panel/features/category/presentatation/manager/cubit/category_cubit.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/domain/entites/sub_category_entity.dart';
 import 'package:ecommerce_app_admin_panel/features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +11,6 @@ DataRow subCategoryDataRow({
   required SubCategoryEntity subCategory,
   required context,
 }) {
-  BlocProvider.of<CategoryCubit>(context)
-      .getSingleCategory(categoryId: subCategory.categoryId);
   return DataRow(
     cells: [
       DataCell(
@@ -37,7 +34,7 @@ DataRow subCategoryDataRow({
         ),
       ),
       DataCell(
-        Text(subCategory.categoryId),
+        Text(subCategory.categoryId.name ?? ''),
       ),
       DataCell(
         Text(

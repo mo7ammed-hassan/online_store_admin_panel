@@ -9,12 +9,12 @@ abstract class SubCategoryRemoteDataSource {
     required String subCategoryId,
   });
 
-  Future<SubCategoryEntity> addSubCategory({
+  Future<void> addSubCategory({
     required String name,
     required String categoryId,
   });
 
-  Future<SubCategoryEntity> updateSubCategory({
+  Future<void> updateSubCategory({
     required String name,
     required String categoryId,
     required String subCategoryId,
@@ -53,30 +53,30 @@ class SubCategoryRemoteDataSourceImpl extends SubCategoryRemoteDataSource {
   }
 
   @override
-  Future<SubCategoryEntity> addSubCategory({
+  Future<void> addSubCategory({
     required String name,
     required String categoryId,
   }) async {
-    var response = await _service.addItem(
+    await _service.addItem(
       endPoint: 'subCategories',
       itemData: {
         'name': name,
         'categoryId': categoryId,
       },
     );
-    SubCategoryEntity newSubCategory =
-        SubCategoryEntity.fromJson(response['data']);
+    // SubCategoryEntity newSubCategory =
+    //     SubCategoryEntity.fromJson(response['data']);
 
-    return newSubCategory;
+    // return newSubCategory;
   }
 
   @override
-  Future<SubCategoryEntity> updateSubCategory({
+  Future<void> updateSubCategory({
     required String name,
     required String categoryId,
     required String subCategoryId,
   }) async {
-    final response = await _service.updateItem(
+    await _service.updateItem(
       endPoint: 'subCategories',
       itemId: subCategoryId,
       itemData: {
@@ -85,10 +85,10 @@ class SubCategoryRemoteDataSourceImpl extends SubCategoryRemoteDataSource {
       },
     );
 
-    SubCategoryEntity updatedSubCategory =
-        SubCategoryEntity.fromJson(response['data']);
+    // SubCategoryEntity updatedSubCategory =
+    //     SubCategoryEntity.fromJson(response['data']);
 
-    return updatedSubCategory;
+    // return updatedSubCategory;
   }
 
   @override
